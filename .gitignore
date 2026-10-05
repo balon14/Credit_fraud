@@ -4,3 +4,4 @@ venv/
 .env
 *.csv
 *.parquet
+data/
