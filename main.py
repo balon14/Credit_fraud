@@ -224,6 +224,7 @@ folds = 5
 cv_results =  cross_validate(model, X_train, y_train, scoring='roc_auc', cv=skfold)
 print(roc_auc_score(y_test, model.predict_proba(X_test)[:,1]))
 
+roc_auc = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])
 logger = task.get_logger()
 
 logger.report_scalar(title='roc_auc', series='test', value=float(roc_auc), iteration=1)
