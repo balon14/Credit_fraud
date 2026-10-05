@@ -21,8 +21,9 @@ from sklearn.metrics import roc_auc_score
 from pathlib import Path
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
+from clearml import Task, logger
 
-
+task = Task.init(project_name="fraud", task_name="demo")
 # In[20]:
 
 
@@ -223,6 +224,9 @@ folds = 5
 cv_results =  cross_validate(model, X_train, y_train, scoring='roc_auc', cv=skfold)
 print(roc_auc_score(y_test, model.predict_proba(X_test)[:,1]))
 
+logger = task.get_logger()
+
+logger.report_scalar(title='roc_auc', series='test', value=float(roc_auc), iteration=1)
 # # Test
 
 # In[40]:
